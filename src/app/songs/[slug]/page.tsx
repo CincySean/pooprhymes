@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { creditLine, displayRapper, getSong, publicSongs, songsByCategory } from "@/lib/catalog";
 import { slugify } from "@/lib/slug";
 import type { Song } from "@/lib/types";
-import { Bar } from "@/components/Bar";
+import { Bar, BarAsk } from "@/components/Bar";
 import { CoverArt } from "@/components/CoverArt";
 import { CategoryPill } from "@/components/CategoryPill";
 
@@ -72,17 +72,11 @@ export default async function SongPage({ params }: { params: Params }) {
       <div className="rule-heavy grid gap-10 pt-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
         <section aria-labelledby="the-bar">
           <h2 id="the-bar" className="mb-4 text-sm font-semibold text-mute">
-            The bar{song.rapper && song.rapper !== song.artist ? ` (${rapper}'s verse)` : ""}
+            {song.bar ? "The bar" : "The reference"}
+            {song.rapper && song.rapper !== song.artist ? ` (${rapper}'s verse)` : ""}
           </h2>
           <Bar song={song} size="xl" />
-          {song.status === "needs_bar" && song.note && (
-            <p className="mt-6 max-w-prose text-mute">
-              What we know so far: {song.note}{" "}
-              <Link href={`/submit?song=${encodeURIComponent(song.slug)}`} className="font-semibold text-ink underline underline-offset-2">
-                Add the line and timestamp.
-              </Link>
-            </p>
-          )}
+          <BarAsk song={song} className="mt-5 max-w-prose" />
           <ListenLinks song={song} />
         </section>
 

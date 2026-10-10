@@ -33,7 +33,7 @@ export default function HomePage() {
               {today.year ? `, ${today.year}` : ""}
             </span>
           </p>
-          <p className="mt-2 max-w-xl text-mute">{firstSentence(today.annotation)}</p>
+          <p className="mt-3 max-w-xl text-mute">{firstSentence(today.annotation)}</p>
           <Link href={`/songs/${today.slug}`} className="mt-4 inline-block font-semibold underline underline-offset-4">
             Read the annotation
           </Link>

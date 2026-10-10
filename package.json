@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "validate": "node scripts/validate-catalog.mjs"
+    "validate": "node scripts/validate-catalog.mjs",
+    "covers": "node scripts/fetch-covers.mjs"
   },
   "dependencies": {
     "next": "^15.5.0",

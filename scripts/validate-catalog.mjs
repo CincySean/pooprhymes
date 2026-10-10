@@ -22,6 +22,7 @@ for (const [i, s] of songs.entries()) {
   for (const c of s.categories ?? []) if (!CATEGORIES.has(c)) errors.push(`${where}: unknown category "${c}"`);
   if (!STATUSES.has(s.status)) errors.push(`${where}: unknown status "${s.status}"`);
   if (s.status === "verified" && !s.bar) errors.push(`${where}: verified entries need a bar`);
+  if (!s.bar && !s.note) errors.push(`${where}: entries without a bar need a note describing the reference`);
   if (s.status === "verified" && !s.timestamp) errors.push(`${where}: verified entries need a timestamp`);
   if (s.bar && s.bar.split(/\s+/).length > MAX_BAR_WORDS) errors.push(`${where}: bar is over ${MAX_BAR_WORDS} words — keep excerpts short`);
   if (s.bar && s.bar.split("\n").length > 2) errors.push(`${where}: bar is more than two lines`);

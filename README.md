@@ -67,10 +67,16 @@ reads from the bottom up.
 
 ### The seed catalog
 
-The 33 entries shipped here were pulled from published lists (Complex's fart-rap roundup, Vice's history of poop rap and its
-Lil Wayne guide, Miami New Times) and are all marked `needs_bar`: artist, song, year, category, and annotation are filled in,
-but the `bar` and `timestamp` fields are blank. Every one of those pages shows a highlighted "bar not transcribed yet" link
-into the submit form. Fill them in from your own listening, flip `status` to `verified`, and they're live.
+The 69 entries shipped here were pulled from published lists and reviews (Complex's fart-rap roundup, Vice's history of poop
+rap and its Lil Wayne guide, Songfacts, Wikipedia, Miami New Times, The Source, and others; each entry's `source` says which).
+Every one has artist, song, year, categories, a `note` describing the reference in our own words, and a written annotation.
+The `bar` (the exact quoted line) and `timestamp` are blank on all of them. While `bar` is empty the page shows the `note` in
+the highlight instead, so entries read as complete; once you fill in the line and timestamp, flip `status` to `verified`.
+
+### Cover art
+
+`npm run covers` fills `coverUrl` and `links.apple` for every entry from the iTunes Search API (no key required). It skips
+entries that already have art; `--force` redoes them all. Check `git diff` afterwards for mismatches.
 
 ## Submissions
 

@@ -2,8 +2,10 @@ import Link from "next/link";
 import type { Song } from "@/lib/types";
 
 /**
- * The excerpt. One or two lines, highlighted. When nobody has transcribed the
- * bar yet, the empty state is an invitation to go find it.
+ * The highlighted excerpt. When the exact line hasn't been transcribed yet, the
+ * highlight carries the editors' description of the reference instead, so the
+ * entry still reads as a finished page and the empty bar is a quiet ask rather
+ * than a hole.
  */
 export function Bar({ song, size = "md", link = false }: { song: Song; size?: "md" | "lg" | "xl"; link?: boolean }) {
   const sizeClass =
@@ -13,17 +15,8 @@ export function Bar({ song, size = "md", link = false }: { song: Song; size?: "m
         ? "text-2xl leading-snug sm:text-3xl"
         : "text-lg leading-snug";
 
-  if (!song.bar) {
-    return (
-      <p className={`${sizeClass} font-semibold`}>
-        <Link href={`/submit?song=${encodeURIComponent(song.slug)}`} className="bar-highlight">
-          Bar not transcribed yet. Know the line and the timestamp?
-        </Link>
-      </p>
-    );
-  }
-
-  const lines = song.bar.split("\n");
+  const text = song.bar || song.note || "";
+  const lines = text.split("\n");
   const inner = lines.map((line, i) => (
     <span key={i}>
       <span className="bar-highlight">{line}</span>
@@ -40,6 +33,19 @@ export function Bar({ song, size = "md", link = false }: { song: Song; size?: "m
       ) : (
         inner
       )}
+    </p>
+  );
+}
+
+/** Small line under an un-transcribed bar inviting the exact quote. */
+export function BarAsk({ song, className = "" }: { song: Song; className?: string }) {
+  if (song.bar) return null;
+  return (
+    <p className={`text-sm text-mute ${className}`}>
+      That&rsquo;s the reference, in our words.{" "}
+      <Link href={`/submit?song=${encodeURIComponent(song.slug)}`} className="font-semibold text-ink underline underline-offset-2">
+        Know the exact line and timestamp?
+      </Link>
     </p>
   );
 }

@@ -24,8 +24,8 @@ export default function AboutPage() {
         <h2 className="display pt-6 text-3xl">How entries get in</h2>
         <p>
           Anyone can <Link href="/submit" className="font-semibold underline underline-offset-2">submit a bar</Link>. An editor checks
-          that the song exists, the line is right, and the timestamp is close, then writes or edits the annotation. Entries marked
-          &ldquo;bar not transcribed yet&rdquo; are songs we know belong here but haven&rsquo;t finished.
+          that the song exists, the line is right, and the timestamp is close, then writes or edits the annotation. Entries that show
+          the reference in our words instead of the quote are songs we know belong here but haven&rsquo;t finished transcribing.
         </p>
 
         <h2 className="display pt-6 text-3xl">What we quote</h2>
